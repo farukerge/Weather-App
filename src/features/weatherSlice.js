@@ -7,7 +7,7 @@ export const fetchWeatherAction = createAsyncThunk(
     'weather/fetch',
     async (city, rejectedWihValue,) => {
         try {
-            const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`);
+            const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}&units=metric`);
             return data;
         } catch (error) {
             if (!error?.response) {
@@ -18,28 +18,28 @@ export const fetchWeatherAction = createAsyncThunk(
      }
 )
 
+const initialState = {
+
+}
 export const weatherSlice = createSlice({
     name: "weather",
-    initialState: {},
+    initialState,
     reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(fetchWeatherAction.pending, (state, action) => {
-            state.loading = true;
-        });
-
-        builder.addCase(fetchWeatherAction.fulfilled, (state, action) => {
+    extraReducers:{
+        [fetchWeatherAction.pending]: (state, action) => {
+            state.loading =true
+        },
+        [fetchWeatherAction.fulfilled]: (state, action) => {
             state.weather = action?.payload;
             state.loading = false;
             state.error = undefined;
-        })
-
-        builder.addCase(fetchWeatherAction.rejected, (state, action) => {
+        },
+        [fetchWeatherAction.rejected]: (state, action) => {
             state.loading = false;
             state.weather = undefined;
             state.action = action?.payload;
-        })
+        }
     }
-   
 })
 
 

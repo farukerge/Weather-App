@@ -10,7 +10,7 @@ const Form = () => {
   
   
   useEffect(() => {
-    dispatch(fetchWeatherAction("bursa"))
+    dispatch(fetchWeatherAction("Johannesburg"))
   }, []);
 
 
@@ -18,19 +18,23 @@ const Form = () => {
     e.preventDefault();
   }
   return (
-    <form onSubmit={handleSubmit} >
+    <form
+      className=" py-4 ml-2 text-black"
+      onSubmit={handleSubmit}
+    >
         <input
         type='text'
         placeholder="Search City"
         value={city}
         onChange={(e) => setCity(e.target.value)}
+        className="placeholder:italic placeholder:text-black block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
         />
       <button
+        className="disabled invisible"
         onClick={() => dispatch(fetchWeatherAction(city))}
       >
         click
       </button>
-      <img src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`} alt="" /><h1>{  }</h1>
     </form>
   )
 }

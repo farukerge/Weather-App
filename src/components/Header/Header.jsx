@@ -2,8 +2,8 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>
-        <h1>Weatcher Forecast</h1>
+    <div className='flex text-center w-full justify-center '>
+        <h1 className='text-4xl font-bold'>Weather Forecast</h1>
     </div>
   )
 }
